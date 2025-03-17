@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news_app/core/utils/formatters.dart';
+import 'package:hacker_news_app/features/stories/presentation/providers/story_provider.dart';
 import '../../../stories/data/repositories/stories_repository_impl.dart';
 
 class SubmissionTile extends ConsumerWidget {
@@ -15,12 +16,15 @@ class SubmissionTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final storyAsync = ref.watch(
-      FutureProvider((ref) {
-        final repository = ref.watch(storiesRepositoryProvider);
-        return repository.getStory(storyId);
-      }),
-    );
+    // Replace your existing story watching code with:
+    final storyAsync = ref.watch(storyProvider(storyId));
+
+    // final storyAsync = ref.watch(
+    //   FutureProvider((ref) async {
+    //     final repository = ref.watch(storiesRepositoryProvider);
+    //     return await repository.getStory(storyId);
+    //   }),
+    // );
 
     return storyAsync.when(
       data: (story) => Card(

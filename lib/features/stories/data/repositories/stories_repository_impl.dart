@@ -25,7 +25,8 @@ class StoriesRepositoryImpl implements StoriesRepository {
 
   @override
   Future<Story> getStory(int id) async {
-    return _apiService.getStory(id);
+    final response = await _apiService.getStory(id);
+    return response;
   }
 }
 

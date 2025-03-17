@@ -9,10 +9,11 @@ class Story with _$Story {
     required int id,
     @Default('') String title,
     @Default('') String by,
-    @Default(0) int timestamp,
+    @JsonKey(name: 'time') @Default(0) int timestamp,
     @Default('') String? url,
     @Default(0) int score,
     @Default(<int>[]) List<int> kids,
+    @Default('story') String? type,
   }) = _Story;
 
   factory Story.fromJson(Map<String, dynamic> json) => _$StoryFromJson(json);

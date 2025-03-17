@@ -23,10 +23,12 @@ mixin _$Story {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get by => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time')
   int get timestamp => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
   List<int> get kids => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,10 +44,11 @@ abstract class $StoryCopyWith<$Res> {
       {int id,
       String title,
       String by,
-      int timestamp,
+      @JsonKey(name: 'time') int timestamp,
       String? url,
       int score,
-      List<int> kids});
+      List<int> kids,
+      String? type});
 }
 
 /// @nodoc
@@ -68,6 +71,7 @@ class _$StoryCopyWithImpl<$Res, $Val extends Story>
     Object? url = freezed,
     Object? score = null,
     Object? kids = null,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -98,6 +102,10 @@ class _$StoryCopyWithImpl<$Res, $Val extends Story>
           ? _value.kids
           : kids // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -113,10 +121,11 @@ abstract class _$$StoryImplCopyWith<$Res> implements $StoryCopyWith<$Res> {
       {int id,
       String title,
       String by,
-      int timestamp,
+      @JsonKey(name: 'time') int timestamp,
       String? url,
       int score,
-      List<int> kids});
+      List<int> kids,
+      String? type});
 }
 
 /// @nodoc
@@ -137,6 +146,7 @@ class __$$StoryImplCopyWithImpl<$Res>
     Object? url = freezed,
     Object? score = null,
     Object? kids = null,
+    Object? type = freezed,
   }) {
     return _then(_$StoryImpl(
       id: null == id
@@ -167,6 +177,10 @@ class __$$StoryImplCopyWithImpl<$Res>
           ? _value._kids
           : kids // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -178,10 +192,11 @@ class _$StoryImpl implements _Story {
       {required this.id,
       this.title = '',
       this.by = '',
-      this.timestamp = 0,
+      @JsonKey(name: 'time') this.timestamp = 0,
       this.url = '',
       this.score = 0,
-      final List<int> kids = const <int>[]})
+      final List<int> kids = const <int>[],
+      this.type = 'story'})
       : _kids = kids;
 
   factory _$StoryImpl.fromJson(Map<String, dynamic> json) =>
@@ -196,7 +211,7 @@ class _$StoryImpl implements _Story {
   @JsonKey()
   final String by;
   @override
-  @JsonKey()
+  @JsonKey(name: 'time')
   final int timestamp;
   @override
   @JsonKey()
@@ -214,8 +229,12 @@ class _$StoryImpl implements _Story {
   }
 
   @override
+  @JsonKey()
+  final String? type;
+
+  @override
   String toString() {
-    return 'Story(id: $id, title: $title, by: $by, timestamp: $timestamp, url: $url, score: $score, kids: $kids)';
+    return 'Story(id: $id, title: $title, by: $by, timestamp: $timestamp, url: $url, score: $score, kids: $kids, type: $type)';
   }
 
   @override
@@ -230,13 +249,14 @@ class _$StoryImpl implements _Story {
                 other.timestamp == timestamp) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.score, score) || other.score == score) &&
-            const DeepCollectionEquality().equals(other._kids, _kids));
+            const DeepCollectionEquality().equals(other._kids, _kids) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, by, timestamp, url,
-      score, const DeepCollectionEquality().hash(_kids));
+      score, const DeepCollectionEquality().hash(_kids), type);
 
   @JsonKey(ignore: true)
   @override
@@ -257,10 +277,11 @@ abstract class _Story implements Story {
       {required final int id,
       final String title,
       final String by,
-      final int timestamp,
+      @JsonKey(name: 'time') final int timestamp,
       final String? url,
       final int score,
-      final List<int> kids}) = _$StoryImpl;
+      final List<int> kids,
+      final String? type}) = _$StoryImpl;
 
   factory _Story.fromJson(Map<String, dynamic> json) = _$StoryImpl.fromJson;
 
@@ -271,6 +292,7 @@ abstract class _Story implements Story {
   @override
   String get by;
   @override
+  @JsonKey(name: 'time')
   int get timestamp;
   @override
   String? get url;
@@ -278,6 +300,8 @@ abstract class _Story implements Story {
   int get score;
   @override
   List<int> get kids;
+  @override
+  String? get type;
   @override
   @JsonKey(ignore: true)
   _$$StoryImplCopyWith<_$StoryImpl> get copyWith =>
