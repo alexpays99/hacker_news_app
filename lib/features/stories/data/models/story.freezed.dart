@@ -23,7 +23,6 @@ mixin _$Story {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get by => throw _privateConstructorUsedError;
-  @JsonKey(name: 'time')
   int get timestamp => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
@@ -43,7 +42,7 @@ abstract class $StoryCopyWith<$Res> {
       {int id,
       String title,
       String by,
-      @JsonKey(name: 'time') int timestamp,
+      int timestamp,
       String? url,
       int score,
       List<int> kids});
@@ -114,7 +113,7 @@ abstract class _$$StoryImplCopyWith<$Res> implements $StoryCopyWith<$Res> {
       {int id,
       String title,
       String by,
-      @JsonKey(name: 'time') int timestamp,
+      int timestamp,
       String? url,
       int score,
       List<int> kids});
@@ -177,10 +176,10 @@ class __$$StoryImplCopyWithImpl<$Res>
 class _$StoryImpl implements _Story {
   const _$StoryImpl(
       {required this.id,
-      required this.title,
-      required this.by,
-      @JsonKey(name: 'time') required this.timestamp,
-      this.url,
+      this.title = '',
+      this.by = '',
+      this.timestamp = 0,
+      this.url = '',
       this.score = 0,
       final List<int> kids = const <int>[]})
       : _kids = kids;
@@ -191,13 +190,16 @@ class _$StoryImpl implements _Story {
   @override
   final int id;
   @override
+  @JsonKey()
   final String title;
   @override
+  @JsonKey()
   final String by;
   @override
-  @JsonKey(name: 'time')
+  @JsonKey()
   final int timestamp;
   @override
+  @JsonKey()
   final String? url;
   @override
   @JsonKey()
@@ -253,9 +255,9 @@ class _$StoryImpl implements _Story {
 abstract class _Story implements Story {
   const factory _Story(
       {required final int id,
-      required final String title,
-      required final String by,
-      @JsonKey(name: 'time') required final int timestamp,
+      final String title,
+      final String by,
+      final int timestamp,
       final String? url,
       final int score,
       final List<int> kids}) = _$StoryImpl;
@@ -269,7 +271,6 @@ abstract class _Story implements Story {
   @override
   String get by;
   @override
-  @JsonKey(name: 'time')
   int get timestamp;
   @override
   String? get url;

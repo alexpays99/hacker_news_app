@@ -8,10 +8,10 @@ part of 'story.dart';
 
 _$StoryImpl _$$StoryImplFromJson(Map<String, dynamic> json) => _$StoryImpl(
       id: (json['id'] as num).toInt(),
-      title: json['title'] as String,
-      by: json['by'] as String,
-      timestamp: (json['time'] as num).toInt(),
-      url: json['url'] as String?,
+      title: json['title'] as String? ?? '',
+      by: json['by'] as String? ?? '',
+      timestamp: (json['timestamp'] as num?)?.toInt() ?? 0,
+      url: json['url'] as String? ?? '',
       score: (json['score'] as num?)?.toInt() ?? 0,
       kids: (json['kids'] as List<dynamic>?)
               ?.map((e) => (e as num).toInt())
@@ -24,7 +24,7 @@ Map<String, dynamic> _$$StoryImplToJson(_$StoryImpl instance) =>
       'id': instance.id,
       'title': instance.title,
       'by': instance.by,
-      'time': instance.timestamp,
+      'timestamp': instance.timestamp,
       'url': instance.url,
       'score': instance.score,
       'kids': instance.kids,
