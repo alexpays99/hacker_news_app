@@ -16,7 +16,9 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<User> getUser(String id) async {
-    return _apiService.getUser(id);
+    final response = await _apiService.getUser(id);
+
+    return response;
   }
 }
 

@@ -4,14 +4,14 @@ import 'package:hacker_news_app/core/utils/formatters.dart';
 import '../../../stories/data/repositories/stories_repository_impl.dart';
 
 class SubmissionTile extends ConsumerWidget {
-  final int storyId;
-  final void Function(String? url) onTap;
-
   const SubmissionTile({
     super.key,
     required this.storyId,
     required this.onTap,
   });
+
+  final int storyId;
+  final void Function(String? url) onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -149,8 +149,8 @@ class __$$UserImplCopyWithImpl<$Res>
 class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.id,
-      required this.createdTimestamp,
-      this.about,
+      this.createdTimestamp = 0,
+      this.about = '',
       final List<int> submitted = const <int>[],
       this.karma = 0})
       : _submitted = submitted;
@@ -161,8 +161,10 @@ class _$UserImpl implements _User {
   @override
   final String id;
   @override
+  @JsonKey()
   final int createdTimestamp;
   @override
+  @JsonKey()
   final String? about;
   final List<int> _submitted;
   @override
@@ -218,7 +220,7 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final String id,
-      required final int createdTimestamp,
+      final int createdTimestamp,
       final String? about,
       final List<int> submitted,
       final int karma}) = _$UserImpl;

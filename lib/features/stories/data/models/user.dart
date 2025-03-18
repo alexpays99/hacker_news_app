@@ -7,10 +7,10 @@ part 'user.g.dart';
 class User with _$User {
   const factory User({
     required String id,
-    @Default(0) int createdTimestamp,
+    @Default(0) int? karma,
+    @Default(0) int? created,
     @Default('') String? about,
-    @Default(<int>[]) List<int> submitted,
-    @Default(0) int karma,
+    @Default(<String>[]) List<String> submitted,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
