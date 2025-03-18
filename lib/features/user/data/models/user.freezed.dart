@@ -21,7 +21,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created')
   int get createdTimestamp => throw _privateConstructorUsedError;
   String? get about => throw _privateConstructorUsedError;
   List<int> get submitted => throw _privateConstructorUsedError;
@@ -39,7 +38,7 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @JsonKey(name: 'created') int createdTimestamp,
+      int createdTimestamp,
       String? about,
       List<int> submitted,
       int karma});
@@ -98,7 +97,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @JsonKey(name: 'created') int createdTimestamp,
+      int createdTimestamp,
       String? about,
       List<int> submitted,
       int karma});
@@ -150,7 +149,7 @@ class __$$UserImplCopyWithImpl<$Res>
 class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.id,
-      @JsonKey(name: 'created') required this.createdTimestamp,
+      required this.createdTimestamp,
       this.about,
       final List<int> submitted = const <int>[],
       this.karma = 0})
@@ -162,7 +161,6 @@ class _$UserImpl implements _User {
   @override
   final String id;
   @override
-  @JsonKey(name: 'created')
   final int createdTimestamp;
   @override
   final String? about;
@@ -220,7 +218,7 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final String id,
-      @JsonKey(name: 'created') required final int createdTimestamp,
+      required final int createdTimestamp,
       final String? about,
       final List<int> submitted,
       final int karma}) = _$UserImpl;
@@ -230,7 +228,6 @@ abstract class _User implements User {
   @override
   String get id;
   @override
-  @JsonKey(name: 'created')
   int get createdTimestamp;
   @override
   String? get about;

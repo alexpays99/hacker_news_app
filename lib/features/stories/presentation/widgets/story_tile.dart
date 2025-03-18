@@ -37,7 +37,7 @@ class StoryTile extends StatelessWidget {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Text('by '),
+                  const Text('by '),
                   GestureDetector(
                     onTap: onAuthorTap,
                     child: Text(

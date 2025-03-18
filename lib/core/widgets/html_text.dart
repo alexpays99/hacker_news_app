@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HtmlText extends StatelessWidget {
-  final String html;
+  const HtmlText({super.key, required this.html});
 
-  const HtmlText({
-    super.key,
-    required this.html,
-  });
+  final String html;
 
   @override
   Widget build(BuildContext context) {

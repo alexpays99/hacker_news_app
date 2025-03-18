@@ -11,9 +11,9 @@ abstract class StoriesRepository {
 }
 
 class StoriesRepositoryImpl implements StoriesRepository {
-  final StoriesApiService _apiService;
-
   StoriesRepositoryImpl(this._apiService);
+
+  final StoriesApiService _apiService;
 
   @override
   Future<List<Story>> getTopStories() async {
