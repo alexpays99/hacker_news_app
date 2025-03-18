@@ -7,7 +7,7 @@ part 'user.g.dart';
 class User with _$User {
   const factory User({
     required String id,
-    @JsonKey(name: 'created') required int createdTimestamp,
+    required int createdTimestamp,
     String? about,
     @Default(<int>[]) List<int> submitted,
     @Default(0) int karma,

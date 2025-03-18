@@ -18,6 +18,7 @@ class StoriesNotifier extends AsyncNotifier<List<Story>> {
       final stories = await repository.getTopStories();
       return stories;
     } catch (e) {
+      print(e);
       return [];
     }
   }

@@ -4,7 +4,7 @@ import 'cache_interceptor.dart';
 
 class ApiClient {
   static const String baseUrl = 'https://hacker-news.firebaseio.com/v0';
-  
+
   static Dio createDio() {
     final dio = Dio(
       BaseOptions(

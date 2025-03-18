@@ -19,8 +19,7 @@ class StoriesRepositoryImpl implements StoriesRepository {
   Future<List<Story>> getTopStories() async {
     final storyIds = await _apiService.getTopStories();
     final stories = await Future.wait(
-      storyIds.take(30).map((id) => getStory(id)),
-    );
+        storyIds.take(30).map((id) async => await getStory(id)));
     return stories;
   }
 
