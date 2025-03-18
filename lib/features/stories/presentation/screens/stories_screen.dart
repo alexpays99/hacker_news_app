@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/widgets/error_view.dart';
 import '../providers/stories_provider.dart';
 import '../widgets/story_tile.dart';
@@ -15,7 +16,7 @@ class StoriesScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hacker News'),
+        title: const Text(AppStrings.appName),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -28,7 +29,7 @@ class StoriesScreen extends ConsumerWidget {
         data: (stories) => RefreshIndicator(
           onRefresh: () => ref.read(storiesNotifierProvider.notifier).refresh(),
           child: stories.isEmpty
-              ? const Center(child: Text('No stories available'))
+              ? const Center(child: Text(AppStrings.noStoriesAvailable))
               : ListView.builder(
                   itemCount: stories.length,
                   itemBuilder: (context, index) {
@@ -44,10 +45,7 @@ class StoriesScreen extends ConsumerWidget {
                           }
                         }
                       },
-                      onAuthorTap: () => context.pushNamed(
-                        'user',
-                        params: {'id': story.by},
-                      ),
+                      onAuthorTap: () => context.go('/user/${story.by}'),
                     );
                   },
                 ),

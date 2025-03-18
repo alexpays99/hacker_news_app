@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../constants/app_colors.dart';
 
 class AppTheme {
   static ThemeData get light {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xffff6600),
+        seedColor: AppColors.primary,
         brightness: Brightness.light,
       ),
       useMaterial3: true,
@@ -21,6 +22,11 @@ class AppTheme {
       ),
       listTileTheme: const ListTileThemeData(
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      ),
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: AppColors.textPrimary),
+        bodyMedium: TextStyle(color: AppColors.textPrimary),
+        bodySmall: TextStyle(color: AppColors.textSecondary),
       ),
     );
   }

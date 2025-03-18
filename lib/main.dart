@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/config/service_locator.dart';
+import 'core/constants/app_strings.dart';
 import 'core/router/router.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {
+  setupServiceLocator();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -15,7 +18,7 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      title: 'Hacker News',
+      title: AppStrings.appName,
       theme: AppTheme.light,
       routerConfig: router,
     );

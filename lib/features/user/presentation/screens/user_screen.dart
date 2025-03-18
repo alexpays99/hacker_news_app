@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/formatters.dart';
 import '../../../../core/widgets/error_view.dart';
 import '../../../../core/widgets/html_text.dart';
@@ -34,20 +35,20 @@ class UserScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Created: ${DateFormatter.formatTimestamp(user.createdTimestamp)}',
+                      '${AppStrings.created}${DateFormatter.formatTimestamp(user.createdTimestamp)}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     if (user.karma > 0) ...[
                       const SizedBox(height: 8),
                       Text(
-                        'Karma: ${user.karma}',
+                        '${AppStrings.karma}${user.karma}',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
                     if (user.about != null) ...[
                       const SizedBox(height: 16),
                       const Text(
-                        'About',
+                        AppStrings.about,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -62,12 +63,12 @@ class UserScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              'Submissions',
+              AppStrings.submissions,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 16),
             if (user.submitted.isEmpty)
-              const Center(child: Text('No submissions yet'))
+              const Center(child: Text(AppStrings.noSubmissions))
             else
               ...user.submitted.take(30).map((storyId) => Hero(
                     tag: 'story_$storyId',
@@ -86,9 +87,7 @@ class UserScreen extends ConsumerWidget {
                   )),
           ],
         ),
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
+        loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => ErrorView(
           message: error.toString(),
           onRetry: () => ref.refresh(userProvider(userId)),

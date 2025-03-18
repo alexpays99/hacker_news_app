@@ -22,7 +22,7 @@ GoRouter router(RouterRef ref) {
         path: '/user/:id',
         name: 'user',
         pageBuilder: (context, state) {
-          final userId = state.params['id']!;
+          final userId = state.pathParameters['id']!;
           return CustomPageTransition(
             child: UserScreen(userId: userId),
           );
