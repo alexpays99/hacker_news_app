@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/services/cache_service.dart';
-import '../../data/models/story.dart';
 
 class ExpandableText extends StatefulWidget {
   final String text;
@@ -69,26 +66,6 @@ class _ExpandableTextState extends State<ExpandableText> {
             ),
           ),
       ],
-    );
-  }
-}
-
-// Use ExpandableText in your submission items:
-class SubmissionItem extends StatelessWidget {
-  final Story story;
-
-  const SubmissionItem({super.key, required this.story});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ExpandableText(
-          story.title,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-      ),
     );
   }
 }
