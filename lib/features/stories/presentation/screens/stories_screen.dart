@@ -45,7 +45,10 @@ class StoriesScreen extends ConsumerWidget {
                           }
                         }
                       },
-                      onAuthorTap: () => context.go('/user/${story.by}'),
+                      onAuthorTap: () => context.pushNamed(
+                        'user',
+                        params: {'id': story.by},
+                      ),
                     );
                   },
                 ),
