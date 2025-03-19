@@ -1,13 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/config/providers.dart';
 import '../datasources/stories_api_service.dart';
 import '../models/story.dart';
+import '../../../../core/services/cache_service.dart';
 
 part 'stories_repository_impl.g.dart';
 
 abstract class StoriesRepository {
   Future<List<Story>> getTopStories();
-  Future<Story> getStory(int id);
+  Future<Story?> getStory(int id);
 }
 
 class StoriesRepositoryImpl implements StoriesRepository {
@@ -17,16 +19,55 @@ class StoriesRepositoryImpl implements StoriesRepository {
 
   @override
   Future<List<Story>> getTopStories() async {
-    final storyIds = await _apiService.getTopStories();
-    final stories = await Future.wait(
-        storyIds.take(30).map((id) async => await getStory(id)));
-    return stories;
+    try {
+      // Check cache first
+      final cachedStories =
+          CacheService.getCachedData(CacheService.storiesBox, 'top_stories');
+      if (cachedStories != null) {
+        return (cachedStories as List)
+            .map((story) => Story.fromJson(story))
+            .toList();
+      }
+
+      // If not in cache, fetch from API
+      final storyIds = await _apiService.getTopStories();
+      final stories =
+          await Future.wait(storyIds.take(30).map((id) => getStory(id)));
+      final validStories = stories
+          .where((story) => story != null)
+          .map((story) => story!)
+          .toList();
+
+      // Cache the fetched stories
+      await CacheService.cacheData(CacheService.storiesBox, 'top_stories',
+          validStories.map((story) => story.toJson()).toList());
+
+      return validStories;
+    } catch (e) {
+      debugPrint('Error fetching top stories: $e');
+      return [];
+    }
   }
 
   @override
-  Future<Story> getStory(int id) async {
-    final response = await _apiService.getStory(id);
-    return response;
+  Future<Story?> getStory(int id) async {
+    try {
+      // Check cache first
+      final cachedStory =
+          CacheService.getCachedData(CacheService.storiesBox, 'story_$id');
+      if (cachedStory != null) {
+        return Story.fromJson(cachedStory);
+      }
+
+      // If not in cache, fetch from API
+      final story = await _apiService.getStory(id);
+      await CacheService.cacheData(
+          CacheService.storiesBox, 'story_$id', story.toJson());
+      return story;
+    } catch (e) {
+      debugPrint('Error fetching story $id: $e');
+      return null;
+    }
   }
 }
 
