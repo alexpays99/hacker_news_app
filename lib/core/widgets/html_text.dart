@@ -7,8 +7,6 @@ class HtmlText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Basic HTML to text conversion - in a production app, you might want to use
-    // a package like flutter_html for proper HTML rendering
     final text = html
         .replaceAll(RegExp(r'<[^>]*>'), '')
         .replaceAll('&amp;', '&')
